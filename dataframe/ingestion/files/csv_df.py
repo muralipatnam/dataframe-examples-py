@@ -70,10 +70,14 @@ if __name__ == '__main__':
         .option("delimiter", "~") \
         .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin")
 
-    spark.sql("CREATE TABLE IF NOT EXISTS src (key INT, value STRING) USING hive")
+    finance_df.createOrReplaceTempView("myTempTable")
 
-    spark.sql("SELECT * FROM src").show()
-    spark.sql("SELECT COUNT(*) FROM src").show()
+   # spark.sql("CREATE TABLE IF NOT EXISTS src (id INT, income STRING) USING hive")
+
+    spark.sql("CREATE TABLE mytable AS SELECT * FROM myTempTable")
+
+    spark.sql("SELECT * FROM mytable").show()
+    spark.sql("SELECT COUNT(*) FROM mytable").show()
 
     spark.stop()
 
