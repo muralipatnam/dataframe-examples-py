@@ -9,6 +9,7 @@ if __name__ == '__main__':
         .builder \
         .appName("Read Files") \
         .config('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:2.7.4') \
+        .enableHiveSupport()\
         .getOrCreate()
         # .master('local[*]') \
     spark.sparkContext.setLogLevel('ERROR')
@@ -68,6 +69,11 @@ if __name__ == '__main__':
         .option("header", "true") \
         .option("delimiter", "~") \
         .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin")
+
+    spark.sql("CREATE TABLE IF NOT EXISTS src (key INT, value STRING) USING hive")
+
+    spark.sql("SELECT * FROM src").show()
+    spark.sql("SELECT COUNT(*) FROM src").show()
 
     spark.stop()
 
