@@ -50,7 +50,8 @@ def lambda_handler(event, context):
         Applications=[
             {'Name': 'Spark'},
             {'Name': 'Zeppelin'},
-            {'Name': 'Ganglia'}
+            {'Name': 'Ganglia'},
+            {'Name': 'Hive'}
         ],
         VisibleToAllUsers=True,
         ServiceRole='EMR_DefaultRole',
