@@ -90,6 +90,8 @@ if __name__ == '__main__':
     spark.sql("INSERT INTO abc_par  SELECT id,income FROM mytable")
     spark.sql("SELECT COUNT(*) FROM abc_par").show()
     spark.sql("SELECT * FROM abc_par").show()
+    spark.sql("DESCRIBE TABLE abc_part").show()
+    spark.sql("DESCRIBE TABLE abc_par").show()
     spark.stop()
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df.py
