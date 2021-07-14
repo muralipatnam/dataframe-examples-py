@@ -81,6 +81,18 @@ if __name__ == '__main__':
     spark.sql("SELECT COUNT(*) FROM mytable").show()
     spark.sql("SELECT MAX(income) FROM mytable").show()
 
+    muralidf = spark.table("mytable")
+    spark.sqlContext.setConf("hive.exec.dynamic.partition", "true")
+    spark.sqlContext.setConf("hive.exec.dynamic.partition.mode", "nonstrict")
+
+    muralidf.write.partitionBy("id").format("hive").saveAsTable("hive_part_tbl")
+
+    spark.sql("SELECT * FROM hive_part_tbl").show()
+
+
+
+
+
     spark.stop()
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df.py
