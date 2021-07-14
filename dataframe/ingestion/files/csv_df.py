@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     print("Hive results")
     spark.sql("CREATE TABLE IF NOT EXISTS mytable AS SELECT * FROM myTempTable")
-
+    print(type("myTempTable"))
     spark.sql("SELECT * FROM mytable").show()
     spark.sql("SELECT COUNT(*) FROM mytable").show()
     spark.sql("SELECT MAX(income) FROM mytable").show()
