@@ -87,8 +87,9 @@ if __name__ == '__main__':
     spark.sql(insert_sql)
     spark.sql("show partitions abc_part").show()
     spark.sql("CREATE TABLE abc_parquet (id INT, income INT) STORED AS PARQUET")
+    spark.sql("INSERT INTO abc_parquet  SELECT id,income FROM mytable")
     spark.sql("SELECT COUNT(*) FROM abc_parquet").show()
-
+    spark.sql("SELECT * FROM abc_parquet").show()
     spark.stop()
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df.py
