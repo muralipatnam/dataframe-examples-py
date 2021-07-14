@@ -75,7 +75,7 @@ if __name__ == '__main__':
    # spark.sql("CREATE TABLE IF NOT EXISTS src (id INT, income STRING) USING hive")
 
     print("Hive results")
-    spark.sql("CREATE TABLE IF NOT EXISTS mytable AS SELECT * FROM myTempTable STORED AS parquet")
+    spark.sql("CREATE TABLE IF NOT EXISTS mytable STORED AS parquet AS SELECT * FROM myTempTable ")
     #print(type(myTempTable))
     spark.sql("SELECT * FROM mytable").show()
     spark.sql("SELECT COUNT(*) FROM mytable").show()
