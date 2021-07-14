@@ -73,14 +73,19 @@ if __name__ == '__main__':
     finance_df.createOrReplaceTempView("myTempTable")
 
    # spark.sql("CREATE TABLE IF NOT EXISTS src (id INT, income STRING) USING hive")
-
     print("Hive results")
     spark.sql("CREATE TABLE IF NOT EXISTS mytable STORED AS parquet AS SELECT * FROM myTempTable ")
     #print(type(myTempTable))
     spark.sql("SELECT * FROM mytable").show()
     spark.sql("SELECT COUNT(*) FROM mytable").show()
     spark.sql("SELECT MAX(income) FROM mytable").show()
-
+    set_dynamic_mode = "SET hive.exec.dynamic.partition.mode = nonstrict"
+    spaqrk.sql(set_dynamic_mode)
+    create_partitioned_sql = "CREATE TABLE abc_part (id INT, income INT) PARTITIONED BY (id INT)"
+    spark.sql(create_partitioned_sql)
+    insert_sql = "INSERT INTO abc_part PARTITION (id) SELECT id,income FROM mytable"
+    spark.sql(insert_sql)
+    spark.sql("show partitions abc_part")
     spark.stop()
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df.py
