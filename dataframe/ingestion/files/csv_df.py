@@ -81,9 +81,9 @@ if __name__ == '__main__':
     spark.sql("SELECT MAX(income) FROM mytable").show()
     set_dynamic_mode = "SET hive.exec.dynamic.partition.mode = nonstrict"
     spark.sql(set_dynamic_mode)
-    create_partitioned_sql = "CREATE TABLE IF NOT EXISTS abc_part (id INT, income INT) PARTITIONED BY (id INT)"
+    create_partitioned_sql = "CREATE TABLE IF NOT EXISTS abc_part (income INT) PARTITIONED BY (id INT)"
     spark.sql(create_partitioned_sql)
-    insert_sql = "INSERT INTO abc_part PARTITION (id) SELECT id,income FROM mytable"
+    insert_sql = "INSERT INTO abc_part PARTITION (id) SELECT income FROM mytable"
     spark.sql(insert_sql)
     spark.sql("show partitions abc_part")
     spark.stop()
