@@ -1,7 +1,10 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, IntegerType, BooleanType,DoubleType
+from org.apache.spark.sql.hive.HiveContext import hiveSession
 import os.path
 import yaml
+
+
 
 if __name__ == '__main__':
     # Create the SparkSession
@@ -80,18 +83,6 @@ if __name__ == '__main__':
     spark.sql("SELECT * FROM mytable").show()
     spark.sql("SELECT COUNT(*) FROM mytable").show()
     spark.sql("SELECT MAX(income) FROM mytable").show()
-
-    muralidf = sqlContext.sql("SELECT * FROM mytable")
-    spark.sqlContext.setConf("hive.exec.dynamic.partition", "true")
-    spark.sqlContext.setConf("hive.exec.dynamic.partition.mode", "nonstrict")
-
-    muralidf.write.partitionBy("id").format("hive").saveAsTable("hive_part_tbl")
-
-    spark.sql("SELECT * FROM hive_part_tbl").show()
-
-
-
-
 
     spark.stop()
 
