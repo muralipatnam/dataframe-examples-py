@@ -81,7 +81,7 @@ if __name__ == '__main__':
     spark.sql("SELECT COUNT(*) FROM mytable").show()
     spark.sql("SELECT MAX(income) FROM mytable").show()
 
-    muralidf = spark.table("mytable")
+    muralidf = sqlContext.sql("SELECT * FROM mytable")
     spark.sqlContext.setConf("hive.exec.dynamic.partition", "true")
     spark.sqlContext.setConf("hive.exec.dynamic.partition.mode", "nonstrict")
 
