@@ -1,10 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, IntegerType, BooleanType,DoubleType
-from org.apache.spark.sql.hive.HiveContext import hiveSession
 import os.path
 import yaml
-
-
 
 if __name__ == '__main__':
     # Create the SparkSession
