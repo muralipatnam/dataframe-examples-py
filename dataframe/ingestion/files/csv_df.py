@@ -95,8 +95,8 @@ if __name__ == '__main__':
 
     spark.sql("SELECT * FROM students").show()
     print("student info")
-    student_df = spark.sql("SELECT * FROM student_info")
-    student_df.show()
+    # student_df = spark.sql("SELECT * FROM student_info")
+    # student_df.show()
     spark.stop()
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df.py
