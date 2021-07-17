@@ -23,5 +23,15 @@ if __name__ == '__main__':
     people_df.createOrReplaceTempView("people_view")
     spark.sql("SELECT * FROM people_view").show()
 
+    people_df.groupBy("firstName").agg(first("weightInLbs")).show()
+    people_df.groupBy(trim(lower(col('firstName')))).agg(first("weightInLbs")).show()
+    people_df.groupBy(trim(lower(col("firstName")))).agg(first("weightInLbs", True)).show()
+    people_df.sort(col("weightInLbs").desc()).groupBy(trim(lower(col("firstName")))).agg(
+        first("weightInLbs", True)).show()
+    people_df.sort(col("weightInLbs").asc_nulls_last()).groupBy(trim(lower(col("firstName")))).agg(
+        first("weightInLbs", True)).show()
+
+    spark.sql("SELECT TOP 1 WeightInLbs from people_view GROUP BY firstName")
+
 
     # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/more_functions.py
