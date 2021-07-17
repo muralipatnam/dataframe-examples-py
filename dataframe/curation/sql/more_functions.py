@@ -20,3 +20,8 @@ if __name__ == '__main__':
     ])
 
     people_df.show()
+    people_df.createOrReplaceTempView("people_view")
+    spark.sql("SELECT * FROM people_view").show()
+
+
+    # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/more_functions.py
