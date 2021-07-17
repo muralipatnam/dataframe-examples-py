@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     agg_finance_df = spark.sql("""
             select
-                AccountNumber,
+                fname,
                 sum(age) as TotalAge,
                 count(age) as Count,
                 max(age) as MaxAge,
