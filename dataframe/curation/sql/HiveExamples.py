@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     student_df.createOrReplaceTempView("studentsView")
 
-    agg_finance_df = spark.sql("""
+    agg_students_df = spark.sql("""
             select
                 fname,
                 sum(age) as TotalAge,
