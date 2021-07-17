@@ -93,6 +93,8 @@ if __name__ == '__main__':
     spark.sql("DESCRIBE TABLE abc_part").show()
     spark.sql("DESCRIBE TABLE abc_par").show()
 
+    spark.sql("SELECT * FROM students").show()
+    print("student info")
     student_df = spark.sql("SELECT * FROM student_info")
     student_df.show()
     spark.stop()
