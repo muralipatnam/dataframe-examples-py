@@ -23,7 +23,7 @@ if __name__ == '__main__':
     secret = open(app_secrets_path)
     app_secret = yaml.load(secret, Loader=yaml.FullLoader)
 
-    student_df = spark.sql("SELECT * FROM muralidb.student_info")
+    student_df = spark.sql("SELECT * FROM student_info")
     student_df.show()
     spark.stop()
 
