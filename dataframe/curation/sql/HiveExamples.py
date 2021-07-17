@@ -25,6 +25,24 @@ if __name__ == '__main__':
 
     student_df = spark.sql("SELECT * FROM student_info")
     student_df.show()
+    student_df.printSchema()
+
+    student_df.createOrReplaceTempView("studentsView")
+
+    agg_finance_df = spark.sql("""
+            select
+                AccountNumber,
+                sum(age) as TotalAge,
+                count(age) as Count,
+                max(age) as MaxAge,
+                min(age) as MinAge
+            from
+                studentsView
+            group by
+                fname
+            """)
+
+    agg_students_df.show()
     spark.stop()
 
     # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/HiveExamples.py
