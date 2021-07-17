@@ -35,6 +35,6 @@ if __name__ == '__main__':
 
     spark.sql("SELECT firstName,WeightInLbs from " +
               " (SELECT *, row_number() OVER (PARTITION BY trim(lower(firstName)) ORDER BY weightInLbs) as rowNum " +
-              " FROM people_view WHERE ) tmp where tmp.WeightInLbs IS NOT NULL AND  rowNum =1").show()
+              " FROM people_view  ) tmp where tmp.WeightInLbs IS NOT NULL AND  rowNum =1").show()
 
     # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/more_functions.py
